@@ -15,26 +15,26 @@
 int	ft_atoi(char *s)
 {
 	int long	n;
-	int			sign;
 
 	while (*s == ' ' || (*s >= 9 && *s <= 13))
 		s++;
-	sign = 1;
 	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
-			sign *= -1;
+			return (ft_throw_error("arguments must be positive numbers"), 0);
 		s++;
 	}
 	n = 0;
 	while (*s >= '0' && *s <= '9')
 	{
 		n = n * 10 + (*s - '0');
-		if ((n * sign > 2147483647) || (n * sign < -2147483648))
-			return (ft_throw_error("bad arguments"), 0);
+		if (n > 2147483647)
+			return (ft_throw_error("arguments too big"), 0);
 		s++;
 	}
-	return (n * sign);
+	if (n == 0)
+		return (ft_throw_error("arguments must be positive numbers"), 0);
+	return (n);
 }
 
 void	ft_throw_error(char *s)
