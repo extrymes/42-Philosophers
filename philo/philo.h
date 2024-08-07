@@ -22,6 +22,15 @@
 # define CYAN "\x1b[36m"
 # define RESET "\x1b[0m"
 
+typedef struct s_data
+{
+	int	nb_of_philos;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	nb_of_each_philo_to_eat;
+}	t_data;
+
 typedef struct s_philo
 {
 	int	x;

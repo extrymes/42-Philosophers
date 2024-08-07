@@ -14,19 +14,16 @@
 
 int	main(int ac, char **av)
 {
-	int	nb_of_philos;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	nb_of_each_philo_to_eat;
+	t_data	data;
 
 	if (ac != 5 && ac != 6)
-		return (ft_throw_error("bad arguments"), 1);
-	nb_of_philos = ft_atoi(av[1]);
-	time_to_die = ft_atoi(av[2]);
-	time_to_eat = ft_atoi(av[3]);
-	time_to_sleep = ft_atoi(av[4]);
+		return (printf(RED "Usage:\n\t./philo <nb_of_philos> <time_to_die> \
+<time_to_eat> <time_to_sleep> <nb_of_each_philo_to_eat>\n" RESET), 1);
+	data.nb_of_philos = ft_atoi(av[1]);
+	data.time_to_die = ft_atoi(av[2]);
+	data.time_to_eat = ft_atoi(av[3]);
+	data.time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
-		nb_of_each_philo_to_eat = ft_atoi(av[5]);
+		data.nb_of_each_philo_to_eat = ft_atoi(av[5]);
 	return (0);
 }
