@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/07/29 17:19:04 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/10 16:29:08 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int ac, char **av)
 	data.time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
 		data.nb_of_each_philo_to_eat = ft_atoi(av[5]);
+	ft_init_philos(data.nb_of_philos);
 	return (0);
 }

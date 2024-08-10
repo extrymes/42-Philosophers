@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:43:51 by sabras            #+#    #+#             */
-/*   Updated: 2024/07/29 13:41:15 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/10 16:24:09 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <stdio.h>
+# include <pthread.h>
 # define RED "\x1b[31m"
 # define GREEN "\x1b[32m"
 # define YELLOW "\x1b[33m"
@@ -33,10 +34,12 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int	x;
+	int			id;
+	pthread_t	thread;
 }	t_philo;
 
 // Utils
+void	ft_init_philos(int nb_of_philos);
 int		ft_atoi(char *s);
 void	ft_throw_error(char *s);
 
