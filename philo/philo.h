@@ -38,6 +38,9 @@ typedef struct s_philo
 	pthread_t	thread;
 }	t_philo;
 
+// Routine
+void	*routine(void	*ph);
+
 // Utils
 void	ft_init_philos(int nb_of_philos);
 int		ft_atoi(char *s);
