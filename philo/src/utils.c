@@ -12,31 +12,6 @@
 
 #include "../philo.h"
 
-void	ft_init_philos(int nb_of_philos)
-{
-	t_philo	*philos;
-	int		i;
-
-	philos = malloc(nb_of_philos * sizeof(t_philo));
-	if (!philos)
-		ft_throw_error("failed to allocate memory for philos");
-	i = 0;
-	while (i < nb_of_philos)
-	{
-		philos[i].id = i;
-		if (pthread_create(&philos[i].thread, NULL, routine, &philos[i]) != 0)
-			ft_throw_error("failed to create thread");
-		i++;
-	}
-	i = 0;
-	while (i < nb_of_philos)
-	{
-		if (pthread_join(philos[i].thread, NULL) != 0)
-			ft_throw_error("failed to join thread");
-		i++;
-	}
-}
-
 int	ft_atoi(char *s)
 {
 	int long	n;
