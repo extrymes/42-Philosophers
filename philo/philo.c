@@ -6,13 +6,14 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/20 11:41:14 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/20 14:03:07 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 t_philo	*ft_init_philos(t_data *data);
+void	ft_create_threads(t_data *data, t_philo *philos);
 
 int	main(int ac, char **av)
 {
@@ -50,9 +51,25 @@ t_philo	*ft_init_philos(t_data *data)
 		philos[i].eat = 0;
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
-		pthread_mutex_init(philos[i].fork_r, NULL);
-		pthread_mutex_init(philos[i].fork_l, NULL);
+		if (pthread_mutex_init(philos[i].fork_r, NULL) != 0)
+			ft_throw_error("failed to init mutex");
+		if (pthread_mutex_init(philos[i].fork_l, NULL))
+			ft_throw_error("failed to init mutex");
+		philos[i].last_meal = ft_current_time();
 		philos[i].data = data;
+		i++;
+	}
+	ft_create_threads(data, philos);
+	return (philos);
+}
+
+void	ft_create_threads(t_data *data, t_philo *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philos)
+	{
 		if (pthread_create(&philos[i].thread, NULL, routine, &philos[i]) != 0)
 			ft_throw_error("failed to create thread");
 		i++;
@@ -64,5 +81,4 @@ t_philo	*ft_init_philos(t_data *data)
 			ft_throw_error("failed to join thread");
 		i++;
 	}
-	return (philos);
 }

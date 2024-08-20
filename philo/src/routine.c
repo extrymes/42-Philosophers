@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/20 11:09:21 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/20 14:02:46 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*routine(void	*ph)
 	philo = (t_philo *)ph;
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	philo->last_meal = ft_current_time();
 	while (1)
 	{
 		pthread_mutex_lock(philo->fork_r);
