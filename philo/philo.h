@@ -57,6 +57,6 @@ int				ft_atoi(char *s);
 void			ft_dest_mutex(int nb_philos, t_philo *philos);
 unsigned long	ft_current_time(void);
 unsigned long	ft_elapsed_time(unsigned long time);
-void			ft_throw_error(char *s);
+void			ft_print_error(char *s);
 
 #endif

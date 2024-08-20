@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:47:54 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/20 10:19:00 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/20 14:45:16 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_atoi(char *s)
 	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
-			return (ft_throw_error("arguments must be positive numbers"), 0);
+			return (ft_print_error("arguments must be positive numbers"), 0);
 		s++;
 	}
 	n = 0;
@@ -29,11 +29,11 @@ int	ft_atoi(char *s)
 	{
 		n = n * 10 + (*s - '0');
 		if (n > 2147483647)
-			return (ft_throw_error("arguments too big"), 0);
+			return (ft_print_error("arguments too big"), 0);
 		s++;
 	}
 	if (n == 0)
-		return (ft_throw_error("arguments must be positive numbers"), 0);
+		return (ft_print_error("arguments must be positive numbers"), 0);
 	return (n);
 }
 
@@ -46,7 +46,6 @@ void	ft_dest_mutex(int nb_philos, t_philo *philos)
 	{
 		pthread_mutex_destroy(philos[i].fork_r);
 		pthread_mutex_destroy(philos[i].fork_l);
-		pthread_mutex_destroy(&philos[i].fork_m);
 		i++;
 	}
 }
@@ -70,8 +69,7 @@ unsigned long	ft_elapsed_time(unsigned long time)
 	return (ft_current_time() - time);
 }
 
-void	ft_throw_error(char *s)
+void	ft_print_error(char *s)
 {
 	printf(RED "Error: %s\n" RESET, s);
-	exit(1);
 }
