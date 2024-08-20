@@ -44,6 +44,8 @@ t_philo	*ft_init_philos(t_data *data)
 	{
 		philos[i].id = i;
 		philos[i].eat = 0;
+		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
+		philos[i].fork_l = &philos[i].fork_m;
 		pthread_mutex_init(philos[i].fork_r, NULL);
 		pthread_mutex_init(philos[i].fork_l, NULL);
 		philos[i].data = data;
