@@ -60,7 +60,7 @@ void	*checker(void *ph)
 			count = 0;
 		if (ft_get_eat(&philos[i]) >= data->must_eat)
 			count++;
-		if (count == data->nb_philos)
+		if (count == data->nb_philos && data->must_eat != -1)
 			return (ft_set_died(data), NULL);
 		i = (i + 1) % data->nb_philos;
 	}
