@@ -1,7 +1,7 @@
 NAME = philo
 
 SRC_DIR = src
-SRC_FILES = routine.c utils.c
+SRC_FILES = routine.c utils.c utils2.c
 SRCS = philo.c $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 
 OBJS = $(SRCS:.c=.o)
