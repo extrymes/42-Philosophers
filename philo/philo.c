@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 10:25:54 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 11:22:00 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ t_philo	*ft_init_philos(t_data *data)
 
 int	ft_create_threads(t_data *data, t_philo *philos)
 {
-	int	i;
+	pthread_t	thread;
+	int			i;
 
+	if (pthread_create(&thread, NULL, checker, philos))
+		return (ft_error("failed to create thread"), 0);
 	i = 0;
 	while (i < data->nb_philos)
 	{
