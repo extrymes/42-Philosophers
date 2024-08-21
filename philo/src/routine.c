@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 11:42:09 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 11:57:35 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine(void	*ph)
 
 	philo = (t_philo *)ph;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		ft_msleep(1, philo->data);
 	while (1)
 	{
 		pthread_mutex_lock(philo->fork_r);
@@ -32,11 +32,11 @@ void	*routine(void	*ph)
 			philo->data->total_eat++;
 		philo->last_meal = ft_current_time();
 		ft_print(philo, "is eating 🍝");
-		usleep(philo->data->time_to_eat * 1000);
+		ft_msleep(philo->data->time_to_eat, philo->data);
 		pthread_mutex_unlock(philo->fork_r);
 		pthread_mutex_unlock(philo->fork_l);
 		ft_print(philo, "is sleeping 💤");
-		usleep(philo->data->time_to_sleep * 1000);
+		ft_msleep(philo->data->time_to_sleep, philo->data);
 		ft_print(philo, "is thinking 💭");
 		if (ft_check_died(philo->data))
 			break ;
