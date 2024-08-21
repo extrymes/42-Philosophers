@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:47:54 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 10:53:53 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 20:11:57 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,18 @@ int	ft_atoi(char *s)
 	return (n);
 }
 
-void	ft_dest_mutexes(t_philo *philos, int nb_philos)
+void	ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos)
 {
 	int	i;
 
+	pthread_mutex_destroy(&data->print_lock);
+	pthread_mutex_destroy(&data->died_lock);
 	i = 0;
 	while (i < nb_philos)
 	{
 		pthread_mutex_destroy(philos[i].fork_r);
 		pthread_mutex_destroy(philos[i].fork_l);
+		pthread_mutex_destroy(&philos[i].eat_lock);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:43:51 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 11:42:09 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 20:12:19 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ typedef struct s_data
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
-	int				nb_of_each_philo_to_eat;
 	int				must_eat;
-	int				total_eat;
 	int				is_died;
 	unsigned long	time;
 	pthread_mutex_t	print_lock;
@@ -44,12 +42,13 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	int				eat;
+	int				nb_eat;
+	unsigned long	last_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	fork_m;
-	unsigned long	last_meal;
+	pthread_mutex_t	eat_lock;
 	t_data			*data;
 }	t_philo;
 
@@ -59,7 +58,7 @@ void			*checker(void *ph);
 
 // Utils
 int				ft_atoi(char *s);
-void			ft_dest_mutexes(t_philo *philos, int nb_philos);
+void			ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos);
 unsigned long	ft_current_time(void);
 unsigned long	ft_elapsed_time(unsigned long time);
 void			ft_error(char *s);
@@ -67,6 +66,10 @@ void			ft_error(char *s);
 // Utils 2
 void			ft_set_died(t_data *data);
 int				ft_check_died(t_data *data);
+void			ft_set_last_meal(t_philo *philo);
+unsigned long	ft_get_last_meal(t_philo *philo);
+void			ft_increase_eat(t_philo *philo);
+int				ft_get_eat(t_philo *philo);
 int				ft_msleep(unsigned long ms, t_data *data);
 
 #endif

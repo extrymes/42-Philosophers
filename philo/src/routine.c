@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 15:21:00 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 21:28:19 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*routine(void	*ph)
 		pthread_mutex_lock(philo->fork_l);
 		ft_print(philo, "has taken a fork 🍴");
 		ft_increase_eat(philo);
-		philo->last_meal = ft_current_time();
+		ft_set_last_meal(philo);
 		ft_print(philo, "is eating 🍝");
 		ft_msleep(philo->data->time_to_eat, philo->data);
 		pthread_mutex_unlock(philo->fork_r);
@@ -54,7 +54,7 @@ void	*checker(void *ph)
 	i = 0;
 	while (1)
 	{
-		if (ft_current_time() - philos[i].last_meal >= data->time_to_die)
+		if (ft_current_time() - ft_get_last_meal(&philos[i]) >= data->time_to_die)
 			return (ft_print(&philos[i], "died 💀"), ft_set_died(data), NULL);
 		if (i == 0)
 			count = 0;
@@ -69,7 +69,9 @@ void	*checker(void *ph)
 
 void	ft_print(t_philo *philo, char *is_doing)
 {
+	pthread_mutex_lock(&philo->data->print_lock);
 	if (!ft_check_died(philo->data))
 		printf("%lums\t%d %s\n", ft_elapsed_time(philo->data->time),
 			philo->id + 1, is_doing);
+	pthread_mutex_unlock(&philo->data->print_lock);
 }
