@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 21:27:38 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:15:07 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_philo	*ft_init_philos(t_data *data)
 	while (i < data->nb_philos)
 	{
 		philos[i].id = i;
-		philos[i].nb_eat = 0;
+		philos[i].meals = 0;
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
 		if (!ft_init_mutexes(&philos[i]))

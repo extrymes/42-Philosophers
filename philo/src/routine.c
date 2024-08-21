@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 21:28:19 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:19:55 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	*routine(void	*ph)
 		ft_print(philo, "has taken a fork 🍴");
 		pthread_mutex_lock(philo->fork_l);
 		ft_print(philo, "has taken a fork 🍴");
-		ft_increase_eat(philo);
-		ft_set_last_meal(philo);
-		ft_print(philo, "is eating 🍝");
+		ft_eat_meal(philo);
 		ft_msleep(philo->data->time_to_eat, philo->data);
 		pthread_mutex_unlock(philo->fork_r);
 		pthread_mutex_unlock(philo->fork_l);
@@ -58,7 +56,7 @@ void	*checker(void *ph)
 			return (ft_print(&philos[i], "died 💀"), ft_set_died(data), NULL);
 		if (i == 0)
 			count = 0;
-		if (ft_get_eat(&philos[i]) >= data->must_eat)
+		if (ft_get_meals(&philos[i]) >= data->must_eat)
 			count++;
 		if (count == data->nb_philos && data->must_eat != -1)
 			return (ft_set_died(data), NULL);

@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:04:07 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 16:17:40 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:23:14 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,23 @@ int	ft_check_died(t_data *data)
 	return (is_died);
 }
 
-void	ft_set_last_meal(t_philo *philo)
+void	ft_eat_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->eat_lock);
+	ft_print(philo, "is eating 🍝");
+	philo->meals++;
 	philo->last_meal = ft_current_time();
 	pthread_mutex_unlock(&philo->eat_lock);
+}
+
+int	ft_get_meals(t_philo *philo)
+{
+	int	meals;
+
+	pthread_mutex_lock(&philo->eat_lock);
+	meals = philo->meals;
+	pthread_mutex_unlock(&philo->eat_lock);
+	return (meals);
 }
 
 unsigned long	ft_get_last_meal(t_philo *philo)
@@ -46,23 +58,6 @@ unsigned long	ft_get_last_meal(t_philo *philo)
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->eat_lock);
 	return (last_meal);
-}
-
-void	ft_increase_eat(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->eat_lock);
-	philo->nb_eat++;
-	pthread_mutex_unlock(&philo->eat_lock);
-}
-
-int	ft_get_eat(t_philo *philo)
-{
-	int	nb_eat;
-
-	pthread_mutex_lock(&philo->eat_lock);
-	nb_eat = philo->nb_eat;
-	pthread_mutex_unlock(&philo->eat_lock);
-	return (nb_eat);
 }
 
 int	ft_msleep(unsigned long ms, t_data *data)
