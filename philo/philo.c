@@ -41,12 +41,12 @@ int	ft_init_data(t_data *data, char **av)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (av[5])
-		data->nb_of_each_philo_to_eat = ft_atoi(av[5]);
+		data->must_eat = ft_atoi(av[5]);
+	else
+		data->must_eat = -1;
 	if (!data->nb_philos || !data->time_to_die || !data->time_to_eat
-		|| !data->time_to_sleep || !data->nb_of_each_philo_to_eat)
+		|| !data->time_to_sleep || !data->must_eat)
 		return (0);
-	data->must_eat = 0;
-	data->total_eat = 0;
 	data->is_died = 0;
 	data->time = ft_current_time();
 	if (pthread_mutex_init(&data->print_lock, NULL) != 0
@@ -67,7 +67,7 @@ t_philo	*ft_init_philos(t_data *data)
 	while (i < data->nb_philos)
 	{
 		philos[i].id = i;
-		philos[i].eat = 0;
+		philos[i].nb_eat = 0;
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
 		if (pthread_mutex_init(philos[i].fork_r, NULL) != 0

@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 11:57:35 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 15:21:00 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	*routine(void	*ph)
 		ft_print(philo, "has taken a fork 🍴");
 		pthread_mutex_lock(philo->fork_l);
 		ft_print(philo, "has taken a fork 🍴");
-		philo->eat++;
-		if (philo->eat == philo->data->must_eat)
-			philo->data->total_eat++;
+		ft_increase_eat(philo);
 		philo->last_meal = ft_current_time();
 		ft_print(philo, "is eating 🍝");
 		ft_msleep(philo->data->time_to_eat, philo->data);
@@ -48,6 +46,7 @@ void	*checker(void *ph)
 {
 	t_philo	*philos;
 	t_data	*data;
+	int		count;
 	int		i;
 
 	philos = (t_philo *)ph;
@@ -55,13 +54,15 @@ void	*checker(void *ph)
 	i = 0;
 	while (1)
 	{
-		i = (i + 1) % data->nb_philos;
 		if (ft_current_time() - philos[i].last_meal >= data->time_to_die)
-		{
-			ft_print(&philos[i], "died 💀");
-			ft_set_died(data);
-			break ;
-		}
+			return (ft_print(&philos[i], "died 💀"), ft_set_died(data), NULL);
+		if (i == 0)
+			count = 0;
+		if (ft_get_eat(&philos[i]) >= data->must_eat)
+			count++;
+		if (count == data->nb_philos)
+			return (ft_set_died(data), NULL);
+		i = (i + 1) % data->nb_philos;
 	}
 	return (NULL);
 }

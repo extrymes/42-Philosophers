@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:04:07 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 11:57:51 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 15:18:26 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ int	ft_check_died(t_data *data)
 		is_died = 1;
 	pthread_mutex_unlock(&data->died_lock);
 	return (is_died);
+}
+
+void	ft_increase_eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->eat_lock);
+	philo->nb_eat++;
+	pthread_mutex_unlock(&philo->eat_lock);
+}
+
+int	ft_get_eat(t_philo *philo)
+{
+	int	nb_eat;
+
+	pthread_mutex_lock(&philo->eat_lock);
+	nb_eat = philo->nb_eat;
+	pthread_mutex_unlock(&philo->eat_lock);
+	return (nb_eat);
 }
 
 int	ft_msleep(unsigned long ms, t_data *data)
