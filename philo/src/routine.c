@@ -6,13 +6,11 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:19:55 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:30:02 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-void	ft_print(t_philo *philo, char *is_doing);
 
 void	*routine(void	*ph)
 {
@@ -52,7 +50,7 @@ void	*checker(void *ph)
 	i = 0;
 	while (1)
 	{
-		if (ft_current_time() - ft_get_last_meal(&philos[i]) >= data->time_to_die)
+		if (ft_curr_time() - ft_get_last_meal(&philos[i]) >= data->time_to_die)
 			return (ft_print(&philos[i], "died 💀"), ft_set_died(data), NULL);
 		if (i == 0)
 			count = 0;
@@ -63,13 +61,4 @@ void	*checker(void *ph)
 		i = (i + 1) % data->nb_philos;
 	}
 	return (NULL);
-}
-
-void	ft_print(t_philo *philo, char *is_doing)
-{
-	pthread_mutex_lock(&philo->data->print_lock);
-	if (!ft_check_died(philo->data))
-		printf("%lums\t%d %s\n", ft_elapsed_time(philo->data->time),
-			philo->id + 1, is_doing);
-	pthread_mutex_unlock(&philo->data->print_lock);
 }

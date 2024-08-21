@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:47:54 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 20:11:57 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:31:56 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,13 @@ void	ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos)
 	}
 }
 
-unsigned long	ft_current_time(void)
+void	ft_print(t_philo *philo, char *is_doing)
 {
-	struct timeval	time;
-	unsigned long	total;
-	unsigned long	sec;
-	unsigned long	u_sec;
-
-	gettimeofday(&time, NULL);
-	sec = (time.tv_sec * 1000);
-	u_sec = (time.tv_usec / 1000);
-	total = sec + u_sec;
-	return (total);
-}
-
-unsigned long	ft_elapsed_time(unsigned long time)
-{
-	return (ft_current_time() - time);
+	pthread_mutex_lock(&philo->data->print_lock);
+	if (!ft_check_died(philo->data))
+		printf("%lums\t%d %s\n", ft_elap_time(philo->data->time),
+			philo->id + 1, is_doing);
+	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
 void	ft_error(char *s)

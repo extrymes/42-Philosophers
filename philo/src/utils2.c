@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:04:07 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:23:14 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:30:02 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_eat_meal(t_philo *philo)
 	pthread_mutex_lock(&philo->eat_lock);
 	ft_print(philo, "is eating 🍝");
 	philo->meals++;
-	philo->last_meal = ft_current_time();
+	philo->last_meal = ft_curr_time();
 	pthread_mutex_unlock(&philo->eat_lock);
 }
 
@@ -58,18 +58,4 @@ unsigned long	ft_get_last_meal(t_philo *philo)
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->eat_lock);
 	return (last_meal);
-}
-
-int	ft_msleep(unsigned long ms, t_data *data)
-{
-	unsigned long	start;
-
-	start = ft_current_time();
-	while ((ft_current_time() - start) < ms)
-	{
-		if (ft_check_died(data))
-			break ;
-		usleep(500);
-	}
-	return (0);
 }

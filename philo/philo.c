@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:15:07 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:30:02 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_init_data(t_data *data, char **av)
 		|| !data->time_to_sleep || !data->must_eat)
 		return (0);
 	data->is_died = 0;
-	data->time = ft_current_time();
+	data->time = ft_curr_time();
 	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
 		return (ft_error("failed to init mutex"), 0);
 	if (pthread_mutex_init(&data->died_lock, NULL) != 0)
@@ -76,7 +76,7 @@ t_philo	*ft_init_philos(t_data *data)
 		if (!ft_init_mutexes(&philos[i]))
 			return (ft_dest_mutexes(data, philos, i),
 				ft_error("failed to init mutexes"), NULL);
-		philos[i].last_meal = ft_current_time();
+		philos[i].last_meal = ft_curr_time();
 		philos[i].data = data;
 		i++;
 	}
