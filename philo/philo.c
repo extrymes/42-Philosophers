@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 11:22:00 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 16:05:14 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_init_data(t_data *data, char **av)
 	data->is_died = 0;
 	data->time = ft_current_time();
 	if (pthread_mutex_init(&data->print_lock, NULL) != 0
-		&& pthread_mutex_init(&data->died_lock, NULL) != 0)
+		|| pthread_mutex_init(&data->died_lock, NULL) != 0)
 		return (ft_error("failed to init mutexes"), 0);
 	return (1);
 }
@@ -71,7 +71,8 @@ t_philo	*ft_init_philos(t_data *data)
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
 		if (pthread_mutex_init(philos[i].fork_r, NULL) != 0
-			&& pthread_mutex_init(philos[i].fork_l, NULL) != 0)
+			|| pthread_mutex_init(philos[i].fork_l, NULL) != 0
+			|| pthread_mutex_init(&philos[i].eat_lock, NULL) != 0)
 			return (ft_error("failed to init mutexes"), free(philos), NULL);
 		philos[i].last_meal = ft_current_time();
 		philos[i].data = data;
