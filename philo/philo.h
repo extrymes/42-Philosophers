@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:43:51 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 20:12:19 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/21 22:31:56 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	int				nb_eat;
+	int				meals;
 	unsigned long	last_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*fork_r;
@@ -56,20 +56,22 @@ typedef struct s_philo
 void			*routine(void	*ph);
 void			*checker(void *ph);
 
+// Time
+unsigned long	ft_curr_time(void);
+unsigned long	ft_elap_time(unsigned long time);
+int				ft_msleep(unsigned long ms, t_data *data);
+
 // Utils
 int				ft_atoi(char *s);
 void			ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos);
-unsigned long	ft_current_time(void);
-unsigned long	ft_elapsed_time(unsigned long time);
+void			ft_print(t_philo *philo, char *is_doing);
 void			ft_error(char *s);
 
 // Utils 2
 void			ft_set_died(t_data *data);
 int				ft_check_died(t_data *data);
-void			ft_set_last_meal(t_philo *philo);
+void			ft_eat_meal(t_philo *philo);
+int				ft_get_meals(t_philo *philo);
 unsigned long	ft_get_last_meal(t_philo *philo);
-void			ft_increase_eat(t_philo *philo);
-int				ft_get_eat(t_philo *philo);
-int				ft_msleep(unsigned long ms, t_data *data);
 
 #endif
