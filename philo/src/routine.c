@@ -17,14 +17,9 @@ void	*routine(void	*ph)
 	t_philo	*philo;
 
 	philo = (t_philo *)ph;
-	if (philo->id % 2 == 0)
-		ft_msleep(1, philo->data);
 	while (1)
 	{
-		pthread_mutex_lock(philo->fork_r);
-		ft_print(philo, "has taken a fork 🍴");
-		pthread_mutex_lock(philo->fork_l);
-		ft_print(philo, "has taken a fork 🍴");
+		ft_take_forks(philo);
 		ft_eat_meal(philo);
 		ft_msleep(philo->data->time_to_eat, philo->data);
 		pthread_mutex_unlock(philo->fork_r);

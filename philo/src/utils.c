@@ -37,6 +37,24 @@ int	ft_atoi(char *s)
 	return (n);
 }
 
+void	ft_take_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(philo->fork_r);
+		ft_print(philo, "has taken a fork 🍴");
+		pthread_mutex_lock(philo->fork_l);
+		ft_print(philo, "has taken a fork 🍴");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->fork_l);
+		ft_print(philo, "has taken a fork 🍴");
+		pthread_mutex_lock(philo->fork_r);
+		ft_print(philo, "has taken a fork 🍴");
+	}
+}
+
 void	ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos)
 {
 	int	i;
