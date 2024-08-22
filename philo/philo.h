@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:43:51 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:31:56 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/22 15:06:31 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_data
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
+	unsigned long	time_to_think;
 	int				must_eat;
 	int				is_died;
 	unsigned long	time;
@@ -63,6 +64,7 @@ int				ft_msleep(unsigned long ms, t_data *data);
 
 // Utils
 int				ft_atoi(char *s);
+void			ft_take_forks(t_philo *philo);
 void			ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos);
 void			ft_print(t_philo *philo, char *is_doing);
 void			ft_error(char *s);
