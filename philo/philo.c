@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/22 15:19:18 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/22 16:22:01 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 
 	if (ac != 5 && ac != 6)
 		return (printf(RED "Usage:\n\t./philo <nb_philos> <time_to_die> \
-<time_to_eat> <time_to_sleep> <nb_of_each_philo_to_eat>\n" RESET), 1);
+<time_to_eat> <time_to_sleep> [<must_eat>]\n" RESET), 1);
 	if (!ft_init_data(&data, av))
 		return (1);
 	philos = ft_init_philos(&data);
