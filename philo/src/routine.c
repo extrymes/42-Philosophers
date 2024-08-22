@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:30:43 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:30:02 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/22 15:46:30 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	*routine(void	*ph)
 	t_philo	*philo;
 
 	philo = (t_philo *)ph;
+	if (philo->data->nb_philos == 1)
+		return (pthread_mutex_lock(philo->fork_l),
+			ft_print(philo, "has taken a fork 🍴"),
+			pthread_mutex_unlock(philo->fork_l), NULL);
 	while (1)
 	{
 		ft_take_forks(philo);
