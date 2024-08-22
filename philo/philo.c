@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:30:02 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/22 15:19:18 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_philo	*ft_init_philos(t_data *data)
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
 		if (!ft_init_mutexes(&philos[i]))
-			return (ft_dest_mutexes(data, philos, i),
+			return (ft_dest_mutexes(data, philos, i), free(philos),
 				ft_error("failed to init mutexes"), NULL);
 		philos[i].last_meal = ft_curr_time();
 		philos[i].data = data;
