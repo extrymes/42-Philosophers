@@ -88,13 +88,10 @@ t_philo	*ft_init_philos(t_data *data)
 
 int	ft_init_mutexes(t_philo *philo)
 {
-	if (pthread_mutex_init(philo->fork_r, NULL) != 0)
-		return (0);
 	if (pthread_mutex_init(philo->fork_l, NULL) != 0)
-		return (pthread_mutex_destroy(philo->fork_r), 0);
+		return (0);
 	if (pthread_mutex_init(&philo->eat_lock, NULL) != 0)
-		return (pthread_mutex_destroy(philo->fork_r),
-			pthread_mutex_destroy(philo->fork_l), 0);
+		return (pthread_mutex_destroy(philo->fork_l), 0);
 	return (1);
 }
 

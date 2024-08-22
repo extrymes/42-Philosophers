@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:47:54 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/21 22:31:56 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/22 14:53:12 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos)
 	i = 0;
 	while (i < nb_philos)
 	{
-		pthread_mutex_destroy(philos[i].fork_r);
 		pthread_mutex_destroy(philos[i].fork_l);
 		pthread_mutex_destroy(&philos[i].eat_lock);
 		i++;
