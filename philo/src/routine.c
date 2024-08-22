@@ -27,6 +27,7 @@ void	*routine(void	*ph)
 		ft_print(philo, "is sleeping 💤");
 		ft_msleep(philo->data->time_to_sleep, philo->data);
 		ft_print(philo, "is thinking 💭");
+		ft_msleep(philo->data->time_to_think, philo->data);
 		if (ft_check_died(philo->data))
 			break ;
 	}

@@ -37,10 +37,16 @@ int	main(int ac, char **av)
 
 int	ft_init_data(t_data *data, char **av)
 {
+	int	thk;
+
 	data->nb_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
+	data->time_to_think = 0;
+	thk = data->time_to_die - data->time_to_eat - data->time_to_sleep - 5;
+	if (thk > 0)
+		data->time_to_think = thk;
 	if (av[5])
 		data->must_eat = ft_atoi(av[5]);
 	else
