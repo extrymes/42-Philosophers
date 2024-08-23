@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:43:51 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/22 15:06:31 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/23 17:14:13 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ typedef struct s_philo
 void			*routine(void	*ph);
 void			*checker(void *ph);
 
+// States
+void			ft_set_died(t_data *data);
+int				ft_check_died(t_data *data);
+void			ft_eat_meal(t_philo *philo);
+int				ft_get_meals(t_philo *philo);
+unsigned long	ft_get_last_meal(t_philo *philo);
+
 // Time
 unsigned long	ft_curr_time(void);
 unsigned long	ft_elap_time(unsigned long time);
@@ -68,12 +75,5 @@ void			ft_take_forks(t_philo *philo);
 void			ft_dest_mutexes(t_data *data, t_philo *philos, int nb_philos);
 void			ft_print(t_philo *philo, char *is_doing);
 void			ft_error(char *s);
-
-// Utils 2
-void			ft_set_died(t_data *data);
-int				ft_check_died(t_data *data);
-void			ft_eat_meal(t_philo *philo);
-int				ft_get_meals(t_philo *philo);
-unsigned long	ft_get_last_meal(t_philo *philo);
 
 #endif
