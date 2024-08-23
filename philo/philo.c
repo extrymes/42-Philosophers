@@ -6,7 +6,7 @@
 /*   By: sabras <sabras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:47 by sabras            #+#    #+#             */
-/*   Updated: 2024/08/22 16:22:01 by sabras           ###   ########.fr       */
+/*   Updated: 2024/08/23 09:17:47 by sabras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	main(int ac, char **av)
 	philos = ft_init_philos(&data);
 	if (!philos)
 		return (1);
+	if (!ft_create_threads(&data, philos))
+		return (ft_dest_mutexes(&data, philos, data.nb_philos),
+			free(philos), 1);
 	ft_dest_mutexes(&data, philos, data.nb_philos);
 	free(philos);
 	return (0);
@@ -77,18 +80,15 @@ t_philo	*ft_init_philos(t_data *data)
 	{
 		philos[i].id = i;
 		philos[i].meals = 0;
+		philos[i].last_meal = ft_curr_time();
 		philos[i].fork_r = &philos[(philos[i].id + 1) % data->nb_philos].fork_m;
 		philos[i].fork_l = &philos[i].fork_m;
 		if (!ft_init_mutexes(&philos[i]))
 			return (ft_dest_mutexes(data, philos, i), free(philos),
 				ft_error("failed to init mutexes"), NULL);
-		philos[i].last_meal = ft_curr_time();
 		philos[i].data = data;
 		i++;
 	}
-	if (!ft_create_threads(data, philos))
-		return (ft_dest_mutexes(data, philos, data->nb_philos),
-			free(philos), NULL);
 	return (philos);
 }
 
